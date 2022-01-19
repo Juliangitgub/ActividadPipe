@@ -39,7 +39,7 @@ int main() {
     close(fd[READ]);
     // Redirect STDOUT to write to the pipe.
     dup2(fd[WRITE], STDOUT_FILENO);
-    // Execute ls -l
+    // Execute ls 
     execlp("ls", "ls", NULL);
   }
 }
