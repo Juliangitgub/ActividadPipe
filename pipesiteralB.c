@@ -23,12 +23,10 @@ char *const comando2[]={"cat","/etc/hosts",NULL};;
   switch(pid = fork()) {
 
   case 0:
-    // The child process will execute wc.
-    // Close the pipe write descriptor.
+		  
     close(fd[WRITE]);
-    // Redirect STDIN to read from the pipe.
     dup2(fd[READ], STDIN_FILENO);
-    // Execute wc
+    
 	
     execvp(comando[0],comando);
 	break;
@@ -37,12 +35,8 @@ char *const comando2[]={"cat","/etc/hosts",NULL};;
     exit(EXIT_FAILURE);
 	break;
   default:
-    // The parent process will execute ls.
-    // Close the pipe read descriptor.
     close(fd[READ]);
-    // Redirect STDOUT to write to the pipe.
     dup2(fd[WRITE], STDOUT_FILENO);
-    // Execute ls -l
     
     execvp(comando2[0],comando2);
     break;
