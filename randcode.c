@@ -13,15 +13,11 @@ int num;
 pid_t pid;
 
 pipe(fd);
-//error 
-
-
  if (pipe(fd) == -1) {
     perror("Creating pipe");
     exit(EXIT_FAILURE);
   }
 
-//
 pid=fork();
 switch(pid)
 {
@@ -29,7 +25,7 @@ switch(pid)
 case 0://hijo
 close(fd[1]);
 
-read(fd[0],buf,5);//modificar
+read(fd[0],buf,5);
 sscanf(buf, "%d", &num);
 
 if(num<500){
@@ -52,7 +48,6 @@ break;
 // 
 default://Padre
 RN=rand()%(998)+1;
-//printf("EL NUMERO ALEATORIO ES: %i\n",RN);
 sprintf(buf,"%d",RN);
 close(fd[0]);
 write(fd[1],buf,5);
